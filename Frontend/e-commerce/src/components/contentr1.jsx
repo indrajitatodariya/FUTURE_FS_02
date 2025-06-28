@@ -1,24 +1,31 @@
+import watch from '../assets/watch.webp';
+import watch2 from '../assets/watch2.webp';
+import earphone from '../assets/earphones.jpeg';
+import monitor from '../assets/monitor.webp';
+import monitor2 from '../assets/monitor2.webp';
+import speaker from '../assets/speaker.webp';
+import trimmer from '../assets/trimmer.webp';
 
 function Contentr1(){
     return <>
     <div className="flex flex-col mt-5">
-      <div className="ml-5"><h4>group 1</h4></div>
-         <div className="carousel carousel-center  rounded-box max-w-screen space-x-4 p-4">
+      <div className="ml-5"><h1>Electronics Items</h1></div>
+         <div className="carousel carousel-center  rounded-box max-w-screen space-x-4 p-2">
         <div className="carousel-item">
       <div className="card bg-base-100 w-96 shadow-sm">
         <figure>
       <img
-        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-        alt="Shoes" />
+        src={watch}
+        alt="watch" />
         </figure>
         <div className="card-body">
       <h2 className="card-title">
-        Card Title
+        Smart-Watch
         <div className="badge badge-secondary">NEW</div>
       </h2>
-      <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+      <p>Rs.1550</p>
       <div className="card-actions justify-end">
-        <div className="badge badge-outline">Fashion</div>
+        <div className="badge badge-outline">Electronics</div>
         <div className="badge badge-outline">Products</div>
       </div>
         </div>
@@ -28,17 +35,17 @@ function Contentr1(){
       <div className="card bg-base-100 w-96 shadow-sm">
         <figure>
       <img
-        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-        alt="Shoes" />
+        src={earphone}
+        alt="earphones" />
         </figure>
         <div className="card-body">
       <h2 className="card-title">
-        Card Title
+        Earbuds
         <div className="badge badge-secondary">NEW</div>
       </h2>
-      <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+      <p>Rs.3000</p>
       <div className="card-actions justify-end">
-        <div className="badge badge-outline">Fashion</div>
+        <div className="badge badge-outline">Electronics</div>
         <div className="badge badge-outline">Products</div>
       </div>
         </div>
@@ -48,17 +55,17 @@ function Contentr1(){
          <div className="card bg-base-100 w-96 shadow-sm">
         <figure>
       <img
-        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-        alt="Shoes" />
+        src={monitor}
+        alt="monitor" />
         </figure>
         <div className="card-body">
       <h2 className="card-title">
-        Card Title
+        Monitor 
         <div className="badge badge-secondary">NEW</div>
       </h2>
-      <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+      <p>Rs.15000</p>
       <div className="card-actions justify-end">
-        <div className="badge badge-outline">Fashion</div>
+        <div className="badge badge-outline">Electronics</div>
         <div className="badge badge-outline">Products</div>
       </div>
         </div>
@@ -68,17 +75,17 @@ function Contentr1(){
       <div className="card bg-base-100 w-96 shadow-sm">
         <figure>
       <img
-        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-        alt="Shoes" />
+        src={watch2}
+        alt="Smart-watch" />
         </figure>
         <div className="card-body">
       <h2 className="card-title">
-        Card Title
+        Smart-watch
         <div className="badge badge-secondary">NEW</div>
       </h2>
-      <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+      <p>Rs.1400</p>
       <div className="card-actions justify-end">
-        <div className="badge badge-outline">Fashion</div>
+        <div className="badge badge-outline">Smart-watch</div>
         <div className="badge badge-outline">Products</div>
       </div>
         </div>
@@ -88,17 +95,17 @@ function Contentr1(){
       <div className="card bg-base-100 w-96 shadow-sm">
         <figure>
       <img
-        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-        alt="Shoes" />
+        src={speaker}
+        alt="Speaker" />
         </figure>
         <div className="card-body">
       <h2 className="card-title">
-        Card Title
+        Speaker
         <div className="badge badge-secondary">NEW</div>
       </h2>
-      <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+      <p>Rs.2000</p>
       <div className="card-actions justify-end">
-        <div className="badge badge-outline">Fashion</div>
+        <div className="badge badge-outline">Electronics</div>
         <div className="badge badge-outline">Products</div>
       </div>
         </div>
@@ -108,17 +115,17 @@ function Contentr1(){
       <div className="card bg-base-100 w-96 shadow-sm">
         <figure>
       <img
-        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-        alt="Shoes" />
+        src={trimmer}
+        alt="Trimmer" />
         </figure>
         <div className="card-body">
       <h2 className="card-title">
-        Card Title
+        Trimmer
         <div className="badge badge-secondary">NEW</div>
       </h2>
-      <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+      <p>Rs.1600</p>
       <div className="card-actions justify-end">
-        <div className="badge badge-outline">Fashion</div>
+        <div className="badge badge-outline">Electronics</div>
         <div className="badge badge-outline">Products</div>
       </div>
         </div>
@@ -128,15 +135,15 @@ function Contentr1(){
       <div className="card bg-base-100 w-96 shadow-sm">
         <figure>
       <img
-        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-        alt="Shoes" />
+        src={monitor2}
+        alt="asus monitor" />
         </figure>
         <div className="card-body">
       <h2 className="card-title">
-        Card Title
+        Asus Monitor
         <div className="badge badge-secondary">NEW</div>
       </h2>
-      <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+      <p>Rs.25000</p>
       <div className="card-actions justify-end">
         <div className="badge badge-outline">Fashion</div>
         <div className="badge badge-outline">Products</div>
