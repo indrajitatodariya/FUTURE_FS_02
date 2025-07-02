@@ -1,7 +1,7 @@
 import banner11 from '../assets/banner11.webp';
 import banner22 from '../assets/banner22.webp';
-import banner3 from '../assets/banner3.jpg';
-import banner4 from '../assets/banner4.jpg';
+import banner33 from '../assets/banner33.webp';
+import banner44 from '../assets/banner44.webp';
 
 
 function Offers(){
@@ -27,7 +27,7 @@ function Offers(){
   </div>
   <div id="slide3" className="carousel-item relative w-full">
     <img
-      src={banner11}
+      src={banner33}
       className="w-full" />
     <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
       <a href="#slide2" className="btn btn-circle">❮</a>
@@ -36,7 +36,7 @@ function Offers(){
   </div>
   <div id="slide4" className="carousel-item relative w-full">
     <img
-      src={banner11}
+      src={banner44}
       className="w-full" />
     <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
       <a href="#slide3" className="btn btn-circle">❮</a>

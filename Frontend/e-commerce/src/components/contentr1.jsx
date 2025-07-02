@@ -1,159 +1,68 @@
-import watch from '../assets/watch.webp';
-import watch2 from '../assets/watch2.webp';
-import earphone from '../assets/earphones.jpeg';
-import monitor from '../assets/monitor.webp';
-import monitor2 from '../assets/monitor2.webp';
-import speaker from '../assets/speaker.webp';
-import trimmer from '../assets/trimmer.webp';
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import products from "../data/products"; // make sure you have this exported correctly
 
-function Contentr1(){
-    return <>
+function Contentr1({ searchTerm = "" }) {
+  const [sortOrder, setSortOrder] = useState("");
+
+  // Copy searchTerm to lowercase safely
+  const term = searchTerm.toLowerCase();
+
+  // Filter products
+  let filteredProducts = products.filter(product =>
+    product.title.toLowerCase().includes(term)
+  );
+
+  // Sort products
+  if (sortOrder === "lowToHigh") {
+    filteredProducts = [...filteredProducts].sort((a, b) => a.price - b.price);
+  } else if (sortOrder === "highToLow") {
+    filteredProducts = [...filteredProducts].sort((a, b) => b.price - a.price);
+  }
+
+  return (
     <div className="flex flex-col mt-5">
-      <div className="ml-5"><h1>Electronics Items</h1></div>
-         <div className="carousel carousel-center  rounded-box max-w-screen space-x-4 p-2">
-        <div className="carousel-item">
-      <div className="card bg-base-100 w-96 shadow-sm">
-        <figure>
-      <img
-        src={watch}
-        alt="watch" />
-        </figure>
-        <div className="card-body">
-      <h2 className="card-title">
-        Smart-Watch
-        <div className="badge badge-secondary">NEW</div>
-      </h2>
-      <p>Rs.1550</p>
-      <div className="card-actions justify-end">
-        <div className="badge badge-outline">Electronics</div>
-        <div className="badge badge-outline">Products</div>
-      </div>
+      <div className="ml-5 mb-3">
+        <h1 className="text-xl font-bold">Electronics Items</h1>
+        <div className="mt-2">
+          <select
+            className="select select-bordered"
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+          >
+            <option value="">Sort by</option>
+            <option value="lowToHigh">Price: Low to High</option>
+            <option value="highToLow">Price: High to Low</option>
+          </select>
         </div>
       </div>
+
+      {filteredProducts.length === 0 ? (
+        <div className="text-center text-gray-500 p-10">No products found</div>
+      ) : (
+        <div className="carousel carousel-center rounded-box max-w-screen space-x-4 p-2">
+          {filteredProducts.map(product => (
+            <div className="carousel-item" key={product.id}>
+              <Link to={`/product/${product.id}`}>
+                <div className="card bg-base-100 w-80 shadow hover:scale-105 transition-transform">
+                  <figure>
+                    <img src={product.image} alt={product.title} className="h-48 w-full object-contain" />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="card-title">{product.title}</h2>
+                    <p>Rs.{product.price}</p>
+                    <div className="card-actions justify-end">
+                      <div className="badge badge-outline">{product.category}</div>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          ))}
         </div>
-        <div className="carousel-item">
-      <div className="card bg-base-100 w-96 shadow-sm">
-        <figure>
-      <img
-        src={earphone}
-        alt="earphones" />
-        </figure>
-        <div className="card-body">
-      <h2 className="card-title">
-        Earbuds
-        <div className="badge badge-secondary">NEW</div>
-      </h2>
-      <p>Rs.3000</p>
-      <div className="card-actions justify-end">
-        <div className="badge badge-outline">Electronics</div>
-        <div className="badge badge-outline">Products</div>
-      </div>
-        </div>
-      </div>
-        </div>
-        <div className="carousel-item">
-         <div className="card bg-base-100 w-96 shadow-sm">
-        <figure>
-      <img
-        src={monitor}
-        alt="monitor" />
-        </figure>
-        <div className="card-body">
-      <h2 className="card-title">
-        Monitor 
-        <div className="badge badge-secondary">NEW</div>
-      </h2>
-      <p>Rs.15000</p>
-      <div className="card-actions justify-end">
-        <div className="badge badge-outline">Electronics</div>
-        <div className="badge badge-outline">Products</div>
-      </div>
-        </div>
-      </div>
-        </div>
-        <div className="carousel-item">
-      <div className="card bg-base-100 w-96 shadow-sm">
-        <figure>
-      <img
-        src={watch2}
-        alt="Smart-watch" />
-        </figure>
-        <div className="card-body">
-      <h2 className="card-title">
-        Smart-watch
-        <div className="badge badge-secondary">NEW</div>
-      </h2>
-      <p>Rs.1400</p>
-      <div className="card-actions justify-end">
-        <div className="badge badge-outline">Smart-watch</div>
-        <div className="badge badge-outline">Products</div>
-      </div>
-        </div>
-      </div>
-        </div>
-        <div className="carousel-item">
-      <div className="card bg-base-100 w-96 shadow-sm">
-        <figure>
-      <img
-        src={speaker}
-        alt="Speaker" />
-        </figure>
-        <div className="card-body">
-      <h2 className="card-title">
-        Speaker
-        <div className="badge badge-secondary">NEW</div>
-      </h2>
-      <p>Rs.2000</p>
-      <div className="card-actions justify-end">
-        <div className="badge badge-outline">Electronics</div>
-        <div className="badge badge-outline">Products</div>
-      </div>
-        </div>
-      </div>
-        </div>
-        <div className="carousel-item">
-      <div className="card bg-base-100 w-96 shadow-sm">
-        <figure>
-      <img
-        src={trimmer}
-        alt="Trimmer" />
-        </figure>
-        <div className="card-body">
-      <h2 className="card-title">
-        Trimmer
-        <div className="badge badge-secondary">NEW</div>
-      </h2>
-      <p>Rs.1600</p>
-      <div className="card-actions justify-end">
-        <div className="badge badge-outline">Electronics</div>
-        <div className="badge badge-outline">Products</div>
-      </div>
-        </div>
-      </div>
-        </div>
-        <div className="carousel-item">
-      <div className="card bg-base-100 w-96 shadow-sm">
-        <figure>
-      <img
-        src={monitor2}
-        alt="asus monitor" />
-        </figure>
-        <div className="card-body">
-      <h2 className="card-title">
-        Asus Monitor
-        <div className="badge badge-secondary">NEW</div>
-      </h2>
-      <p>Rs.25000</p>
-      <div className="card-actions justify-end">
-        <div className="badge badge-outline">Fashion</div>
-        <div className="badge badge-outline">Products</div>
-      </div>
-        </div>
-      </div>
-        </div>
-      </div>
+      )}
     </div>
-    </>
+  );
 }
 
 export default Contentr1;

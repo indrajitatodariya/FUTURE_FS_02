@@ -1,6 +1,6 @@
-import './App.css';
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from './AuthContext';
+import { AuthProvider } from "./AuthContext";
 import Navbar from './components/navbar';
 import Categories from './components/categories';
 import Offers from './components/offers';
@@ -11,32 +11,35 @@ import Footer from './components/footer';
 import Firstpage from './components/firstpage';
 import Login from './components/Login';
 import Register from './components/Register';
-import ProtectedRoute from './protectedRoute'; // ✅ Import
+import ProductDetail from "./components/productdetails";
+import SearchResults from "./components/SearchResults";
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState("");
+
   return (
-    <AuthProvider> {/* ✅ Wrap everything with AuthProvider */}
-      <Router>     {/* ✅ Add Router around Routes */}
+    <AuthProvider>
+      <Router>
+        <Navbar onSearch={setSearchTerm} />
         <Routes>
           <Route path="/" element={<Firstpage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route 
-            path="/main" 
+          <Route
+            path="/main"
             element={
-              <ProtectedRoute>
-                <>
-                  <Navbar />
-                  <Categories />
-                  <Offers />
-                  <Contentr1 />
-                  <Contentr2 />
-                  <Contentr3 />
-                  <Footer />
-                </>
-              </ProtectedRoute>
-            } 
+              <>
+                <Categories />
+                <Offers />
+                <Contentr1 />
+                <Contentr2 />
+                <Contentr3 />
+                <Footer />
+              </>
+            }
           />
+          <Route path="/search" element={<SearchResults searchTerm={searchTerm} />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
         </Routes>
       </Router>
     </AuthProvider>
