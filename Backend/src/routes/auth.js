@@ -11,7 +11,7 @@ const router = express.Router();
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
-    user: process.env.EMAIL_USER, 
+    user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
 });
@@ -63,7 +63,7 @@ router.get('/verify/:token', async (req, res) => {
   }
 });
 
-// 📌 Login route
+// 📌 Login route (✅ updated)
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -75,7 +75,9 @@ router.post('/login', async (req, res) => {
     if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-    res.json({ token });
+
+    // ✅ Include userId in response
+    res.json({ token, userId: user._id });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

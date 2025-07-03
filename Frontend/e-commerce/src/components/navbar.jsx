@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ThemeToggle from "./theme";
 
 function Navbar({ onSearch }) {
@@ -28,7 +29,7 @@ function Navbar({ onSearch }) {
           onChange={(e) => setSearchInput(e.target.value)}
           onKeyDown={handleSearch}
         />
-        <button className="btn btn-outline">Cart</button>
+        <Link to="/cart" className="btn btn-outline">Cart</Link>
         <button className="btn btn-outline btn-info">Login</button>
         <ThemeToggle />
       </div>
