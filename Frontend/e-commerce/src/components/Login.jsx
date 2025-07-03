@@ -5,7 +5,7 @@ import { useAuth } from '../AuthContext';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { setIsAuthenticated } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -21,12 +21,9 @@ export default function Login() {
       });
 
       const data = await res.json();
-      if (res.ok && data.token) {
-  localStorage.setItem("userId", data.userId);
-  localStorage.setItem("token", data.token);
-  setIsAuthenticated(true);
-  navigate("/main");
-
+      if (res.ok && data.token && data.userId) {
+        login(data.token, data.userId);
+        navigate("/main");
       } else {
         alert(data.message || "Login failed");
       }

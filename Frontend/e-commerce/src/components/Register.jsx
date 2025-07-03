@@ -44,7 +44,7 @@ export default function Register() {
       <h1 className="text-5xl font-bold">Register</h1>
       <p className="py-6">
         After register click below and login to your account,<br /><br />
-        <Link to="/login" className="btn btn-primary">login</Link>
+        <Link to="/verify-notice" className="btn btn-primary">Verify</Link>
       </p>
     </div>
     <div className="card bg-base-00 w-full max-w-sm shrink-0 shadow-2xl">

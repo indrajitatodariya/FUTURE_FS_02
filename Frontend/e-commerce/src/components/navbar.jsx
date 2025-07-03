@@ -1,16 +1,17 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import ThemeToggle from "./theme";
+import { useAuth } from "../AuthContext";
 
 function Navbar({ onSearch }) {
   const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
   const handleSearch = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      onSearch(searchInput.trim()); // trim before passing
+      onSearch(searchInput.trim());
       navigate("/search");
     }
   };
@@ -18,7 +19,7 @@ function Navbar({ onSearch }) {
   return (
     <div className="navbar bg-base-100 w-full">
       <div className="mx-2 flex-1 px-2">
-        <a className="btn btn-ghost text-xl">E-commerce</a>
+        <Link to="/main" className="btn btn-ghost text-xl">E-commerce</Link>
       </div>
       <div className="flex gap-3">
         <input
@@ -29,8 +30,15 @@ function Navbar({ onSearch }) {
           onChange={(e) => setSearchInput(e.target.value)}
           onKeyDown={handleSearch}
         />
+
         <Link to="/cart" className="btn btn-outline">Cart</Link>
-        <button className="btn btn-outline btn-info">Login</button>
+
+        {isAuthenticated && (
+          <>
+            <Link to="/orders" className="btn btn-outline">Order History</Link>
+          </>
+        )}
+
         <ThemeToggle />
       </div>
     </div>

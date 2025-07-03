@@ -1,12 +1,19 @@
 import dotenv from 'dotenv';
-dotenv.config();
+import path from 'path';
+
+// ✅ Load .env
+dotenv.config({ path: path.resolve('./.env') });
+console.log("✅ EMAIL_USER in auth.js:", process.env.EMAIL_USER);
+console.log("✅ EMAIL_PASS in auth.js:", process.env.EMAIL_PASS);
 
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 
 import authRoutes from './routes/auth.js';
-import cartRoutes from './routes/cart.js'; // ✅ added
+import cartRoutes from './routes/cart.js';
+import purchaseRoutes from './routes/purchase.js'; 
+import orderRoutes from './routes/order.js';
 
 const app = express();
 
@@ -22,7 +29,9 @@ mongoose
 
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/cart', cartRoutes); // ✅ added
+app.use('/api/cart', cartRoutes);
+app.use('/api/purchase', purchaseRoutes); 
+app.use('/api/order', orderRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5000;

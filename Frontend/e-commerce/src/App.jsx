@@ -16,6 +16,9 @@ import ProductDetail from "./components/productdetails";
 import CartPage from "./components/CartPage";
 import SearchResults from "./components/SearchResults";
 import ProtectedRoute from "./components/ProtectedRoute";
+import VerifyNotice from "./components/verifyNotice";
+import Checkout from "./components/Checkout";
+import OrderHistory from "./components/OrderHistory";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -28,6 +31,7 @@ function App() {
             <Route path="/" element={<Firstpage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/verify-notice" element={<VerifyNotice />} />
             <Route
               path="/main"
               element={
@@ -44,7 +48,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="/product/:id" element={<ProductDetail />} />
             <Route
               path="/cart"
               element={
@@ -61,6 +64,27 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/product/:id"
+              element={<ProductDetail />}
+            />
+            <Route
+              path="/checkout"
+              element={
+                <ProtectedRoute>
+                  <Checkout />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/orders"
+              element={
+                <ProtectedRoute>
+                  <OrderHistory />
+                </ProtectedRoute>
+              }
+            />
+
           </Routes>
         </Router>
       </CartProvider>
