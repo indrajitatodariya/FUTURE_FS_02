@@ -38,10 +38,9 @@ export default function Login() {
   return (
     <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-white via-gray-100 to-white relative overflow-hidden">
 
-      {/* Decorative glow circle */}
+
       <div className="absolute w-[500px] h-[500px] bg-gradient-to-r from-blue-300 to-purple-300 rounded-full blur-3xl opacity-30 animate-pulse"></div>
 
-      {/* Decorative ring */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
         <svg viewBox="0 0 600 600" className="w-full h-full">
           <defs>

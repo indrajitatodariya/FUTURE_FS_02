@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import path from 'path';
 
-// ✅ Load .env
+
 dotenv.config({ path: path.resolve('./.env') });
 console.log("✅ EMAIL_USER in auth.js:", process.env.EMAIL_USER);
 console.log("✅ EMAIL_PASS in auth.js:", process.env.EMAIL_PASS);
