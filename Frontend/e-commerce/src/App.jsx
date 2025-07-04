@@ -18,9 +18,10 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import VerifyNotice from "./components/verifyNotice";
 import Checkout from "./components/Checkout";
 import OrderHistory from "./components/OrderHistory";
-import smartphonebanner from '../src/assets/smartphonebanner.webp'
-import electronicbanner from '../src/assets/electronicsbanner.webp'
-import fashionbanner from '../src/assets/fashionbanner.webp'
+import smartphonebanner from '../src/assets/smartphonebanner.webp';
+import electronicbanner from '../src/assets/electronicsbanner.webp';
+import fashionbanner from '../src/assets/fashionbanner.webp';
+import { Toaster } from 'react-hot-toast'; // ✅ Already imported
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -29,6 +30,8 @@ function App() {
     <AuthProvider>
       <CartProvider>
         <Router>
+          {/* ✅ Add Toaster here to make it global */}
+          <Toaster position="top-right" reverseOrder={false} />
           <Routes>
             <Route path="/" element={<Firstpage />} />
             <Route path="/login" element={<Login />} />
@@ -41,17 +44,11 @@ function App() {
                   <>
                     <Navbar onSearch={setSearchTerm} />
                     <Offers />
-                    <img
-                      src={electronicbanner}
-                      className="w-full" />
+                    <img src={electronicbanner} className="w-full" />
                     <Contentr1 />
-                    <img
-                      src={smartphonebanner}
-                      className="w-full" />
+                    <img src={smartphonebanner} className="w-full" />
                     <Contentr2 />
-                    <img
-                      src={fashionbanner}
-                      className="w-full" />
+                    <img src={fashionbanner} className="w-full" />
                     <Contentr3 />
                     <Footer />
                   </>
@@ -74,10 +71,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/product/:id"
-              element={<ProductDetail />}
-            />
+            <Route path="/product/:id" element={<ProductDetail />} />
             <Route
               path="/checkout"
               element={
@@ -94,7 +88,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-
           </Routes>
         </Router>
       </CartProvider>

@@ -20,66 +20,70 @@ function CartPage() {
       alert("Please login before placing an order.");
       return;
     }
-    
     navigate("/checkout", { state: { singleItem: item } });
   };
 
   return (
-    <div className="p-5">
-      <h1 className="text-2xl font-bold mb-4">Shopping Cart</h1>
+    <div className="p-6 bg-gray-50 min-h-screen">
+      <h1 className="text-3xl font-bold mb-6 text-center">🛒 Your Shopping Cart</h1>
 
       {cartItems.length === 0 ? (
-        <p>
-          Your cart is empty. <Link to="/main" className="text-blue-500">Continue shopping</Link>
+        <p className="text-center text-gray-500">
+          Your cart is empty. <Link to="/main" className="text-blue-500 underline">Continue shopping</Link>
         </p>
       ) : (
         <>
-          <div className="space-y-4">
+          <div className="space-y-6">
             {cartItems.map((item) => (
-              <div key={item.id} className="card bg-base-100 shadow flex flex-col md:flex-row">
-                <figure className="w-full md:w-48">
-                  <img src={item.image} alt={item.title} className="object-contain h-48 w-full" />
-                </figure>
-                <div className="card-body">
-                  <h2 className="card-title">{item.title}</h2>
-                  <p>Rs.{item.price}</p>
-                  <div className="flex items-center space-x-2">
+              <div
+                key={item.id}
+                className="flex flex-col md:flex-row bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+              >
+                <div className="w-full md:w-48 flex-shrink-0 bg-gray-100 p-3 flex justify-center items-center">
+                  <img src={item.image} alt={item.title} className="object-contain h-40" />
+                </div>
+
+                <div className="flex flex-col p-4 flex-grow space-y-2">
+                  <h2 className="text-xl font-semibold">{item.title}</h2>
+                  <p className="text-green-600 font-medium">Rs. {item.price}</p>
+                  <div className="flex items-center space-x-3">
                     <button
-                      className="btn btn-sm"
+                      className="btn btn-outline btn-sm"
                       onClick={() => updateQuantity(item.id, item.quantity - 1)}
                       disabled={item.quantity === 1}
                     >
                       -
                     </button>
-                    <span>{item.quantity}</span>
+                    <span className="font-medium">{item.quantity}</span>
                     <button
-                      className="btn btn-sm"
+                      className="btn btn-outline btn-sm"
                       onClick={() => updateQuantity(item.id, item.quantity + 1)}
                     >
                       +
                     </button>
                   </div>
-                  <button
-                    className="btn btn-error btn-sm mt-2"
-                    onClick={() => removeFromCart(item.id)}
-                  >
-                    Remove
-                  </button>
 
-                  
-                  <button
-                    className="btn btn-success btn-sm mt-2"
-                    onClick={() => handleSingleBuy(item)}
-                  >
-                    Buy
-                  </button>
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    <button
+                      className="btn btn-error btn-sm"
+                      onClick={() => removeFromCart(item.id)}
+                    >
+                      Remove
+                    </button>
+                    <button
+                      className="btn btn-success btn-sm"
+                      onClick={() => handleSingleBuy(item)}
+                    >
+                      Buy Now
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
 
           <button
-            className="btn btn-primary w-full mt-4"
+            className="btn btn-primary w-full mt-8 text-lg"
             onClick={handleProceedToCheckout}
           >
             Proceed to Checkout

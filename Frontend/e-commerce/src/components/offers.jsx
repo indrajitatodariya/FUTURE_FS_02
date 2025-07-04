@@ -1,50 +1,45 @@
-import banner11 from '../assets/banner11.webp';
+import { useEffect, useState } from "react";
+import banner11 from '../assets/banner11.jpg';
 import banner22 from '../assets/banner22.webp';
 import banner33 from '../assets/banner33.webp';
 import banner44 from '../assets/banner44.webp';
 
+const images = [banner11, banner22, banner33, banner44];
 
-function Offers(){
-    return <>
-    <div className="carousel w-full">
-  <div id="slide1" className="carousel-item relative w-full mb-5">
-    <img
-      src={banner11}
-      className="w-full" />
-    <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-      <a href="#slide4" className="btn btn-circle">❮</a>
-      <a href="#slide2" className="btn btn-circle">❯</a>
+function Offers() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % images.length);
+    }, 3000);
+
+    return () => clearInterval(interval); 
+  }, []);
+
+  const goToPrev = () => {
+    setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const goToNext = () => {
+    setCurrentSlide((prev) => (prev + 1) % images.length);
+  };
+
+  return (
+    <div className="relative w-full mb-5">
+      <div className="w-full h-34 md:h-66 overflow-hidden rounded-lg shadow-lg">
+        <img
+          src={images[currentSlide]}
+          className="w-full h-full object-cover transition-all duration-700"
+          alt={`Banner ${currentSlide + 1}`}
+        />
+      </div>
+      <div className="absolute left-5 right-5 top-1/2 flex justify-between transform -translate-y-1/2">
+        <button onClick={goToPrev} className="btn btn-circle">❮</button>
+        <button onClick={goToNext} className="btn btn-circle">❯</button>
+      </div>
     </div>
-  </div>
-  <div id="slide2" className="carousel-item relative w-full">
-    <img
-      src={banner22}
-      className="w-full" />
-    <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-      <a href="#slide1" className="btn btn-circle">❮</a>
-      <a href="#slide3" className="btn btn-circle">❯</a>
-    </div>
-  </div>
-  <div id="slide3" className="carousel-item relative w-full">
-    <img
-      src={banner33}
-      className="w-full" />
-    <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-      <a href="#slide2" className="btn btn-circle">❮</a>
-      <a href="#slide4" className="btn btn-circle">❯</a>
-    </div>
-  </div>
-  <div id="slide4" className="carousel-item relative w-full">
-    <img
-      src={banner44}
-      className="w-full" />
-    <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-      <a href="#slide3" className="btn btn-circle">❮</a>
-      <a href="#slide1" className="btn btn-circle">❯</a>
-    </div>
-  </div>
-</div>
-    </>
+  );
 }
 
 export default Offers;

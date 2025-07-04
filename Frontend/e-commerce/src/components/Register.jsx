@@ -30,50 +30,73 @@ export default function Register() {
   };
 
   return (
-    <>
- <div
-  className="hero min-h-screen"
-  style={{
-    backgroundImage:
-      "url(https://images.unsplash.com/photo-1523275335684-37898b6baf30)",
-  }}
->
-    <div className="hero  min-h-screen">
-  <div className="hero-content flex-col lg:flex-row-reverse">
-    <div className="text-center lg:text-left">
-      <h1 className="text-5xl font-bold">Register</h1>
-      <p className="py-6">
-        After register click below and login to your account,<br /><br />
-        <Link to="/verify-notice" className="btn btn-primary">Verify</Link>
-      </p>
-    </div>
-    <div className="card bg-base-00 w-full max-w-sm shrink-0 shadow-2xl">
-      <div className="card-body">
-        <form onSubmit={handleRegister} className="flex flex-col gap-2 p-4">
-        <fieldset className="fieldset">
+    <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-white via-gray-100 to-white relative overflow-hidden">
+
+      {/* Decorative glow circle */}
+      <div className="absolute w-[500px] h-[500px] bg-gradient-to-r from-blue-300 to-purple-300 rounded-full blur-3xl opacity-30 animate-pulse"></div>
+
+      {/* Decorative ring */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+        <svg viewBox="0 0 600 600" className="w-full h-full">
+          <defs>
+            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#60a5fa" />
+              <stop offset="100%" stopColor="#c084fc" />
+            </linearGradient>
+          </defs>
+          <circle
+            cx="300"
+            cy="300"
+            r="220"
+            stroke="url(#grad)"
+            strokeWidth="4"
+            fill="none"
+            className="animate-spin-slow"
+          />
+        </svg>
+      </div>
+
+      <div className="relative bg-white/60 backdrop-blur-md p-8 rounded-xl shadow-xl w-full max-w-md z-10">
+        <h1 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+          Register
+        </h1>
+        <p className="text-center text-gray-600 mb-6">
+          After registering, click below and login to your account.
+        </p>
+
+        <form onSubmit={handleRegister} className="flex flex-col gap-4">
           <label className="label">Email</label>
-          <input type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-        className="input input-bordered" />
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="input input-bordered w-full"
+          />
           <label className="label">Password</label>
-          <input type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-        className="input input-bordered" />
-          <div><a className="link link-hover">Forgot password?</a></div>
-          <button className="btn btn-primary mt-4" type="submit">Register</button>
-        </fieldset>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="input input-bordered w-full"
+          />
+          <div className="flex justify-end text-sm">
+            <a className="link link-hover">Forgot password?</a>
+          </div>
+          <button className="btn btn-primary bg-gradient-to-r from-blue-500 to-purple-500 border-none text-white w-full" type="submit">
+            Register
+          </button>
         </form>
+
+        <div className="mt-6 text-center">
+          <Link to="/verify-notice" className="btn btn-outline btn-primary">
+            Verify
+          </Link>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-</div>
-    </>
   );
 }

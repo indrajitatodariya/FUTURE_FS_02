@@ -36,52 +36,77 @@ export default function Login() {
   };
 
   return (
-    <div
-      className="hero min-h-screen"
-      style={{
-        backgroundImage: "url(https://images.unsplash.com/photo-1523275335684-37898b6baf30)"
-      }}
-    >
-      <div className="hero min-h-screen">
-        <div className="hero-content flex-col lg:flex-row-reverse">
-          <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Login now!</h1>
-            <p className="py-6">
-              Login with your registered email and password.<br /><br />
-              Not registered yet? <Link to="/register" className="btn btn-primary mt-2">Register</Link>
-            </p>
+    <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-white via-gray-100 to-white relative overflow-hidden">
+
+      {/* Decorative glow circle */}
+      <div className="absolute w-[500px] h-[500px] bg-gradient-to-r from-blue-300 to-purple-300 rounded-full blur-3xl opacity-30 animate-pulse"></div>
+
+      {/* Decorative ring */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+        <svg viewBox="0 0 600 600" className="w-full h-full">
+          <defs>
+            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#60a5fa" />
+              <stop offset="100%" stopColor="#c084fc" />
+            </linearGradient>
+          </defs>
+          <circle
+            cx="300"
+            cy="300"
+            r="220"
+            stroke="url(#grad)"
+            strokeWidth="4"
+            fill="none"
+            className="animate-spin-slow"
+          />
+        </svg>
+      </div>
+
+      <div className="relative bg-white/60 backdrop-blur-md p-8 rounded-xl shadow-xl w-full max-w-md z-10">
+        <h1 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+          Login
+        </h1>
+        <p className="text-center text-gray-600 mb-6">
+          Login with your registered email and password.
+        </p>
+
+        <form onSubmit={handleLogin}>
+          <label className="label">Email</label>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="input input-bordered w-full mb-4"
+          />
+          <label className="label">Password</label>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="input input-bordered w-full mb-2"
+          />
+          <div className="flex justify-end mb-4">
+            <a className="link link-hover text-sm">Forgot password?</a>
           </div>
-          <div className="card w-full max-w-sm shrink-0 shadow-xl bg-base-0">
-            <div className="card-body">
-              <form onSubmit={handleLogin}>
-                <fieldset>
-                  <label className="label">Email</label>
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="input input-bordered"
-                  />
-                  <label className="label">Password</label>
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    className="input input-bordered"
-                  />
-                  <div><a className="link link-hover">Forgot password?</a></div>
-                  <button className="btn btn-primary mt-4" type="submit" disabled={loading}>
-                    {loading ? "Logging in..." : "Login"}
-                  </button>
-                </fieldset>
-              </form>
-            </div>
-          </div>
-        </div>
+          <button
+            className="btn btn-primary w-full bg-gradient-to-r from-blue-500 to-purple-500 border-none text-white"
+            type="submit"
+            disabled={loading}
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+
+        <p className="mt-4 text-center text-gray-600">
+          Not registered yet?{" "}
+          <Link to="/register" className="text-blue-500 font-medium hover:underline">
+            Register
+          </Link>
+        </p>
       </div>
     </div>
   );
