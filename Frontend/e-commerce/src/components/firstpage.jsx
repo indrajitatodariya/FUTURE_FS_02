@@ -6,10 +6,9 @@ function Firstpage() {
       <div
         className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-white via-gray-100 to-white relative overflow-hidden"
       >
-        {/* Soft gradient circle glow */}
+
         <div className="absolute w-[600px] h-[600px] bg-gradient-to-r from-blue-300 to-purple-300 rounded-full blur-3xl opacity-40 animate-pulse"></div>
 
-        {/* Decorative gradient ring lines */}
         <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
           <svg viewBox="0 0 600 600" className="w-full h-full">
             <defs>
