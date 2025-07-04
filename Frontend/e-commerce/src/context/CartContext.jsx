@@ -10,7 +10,6 @@ export function CartProvider({ children }) {
 
   const userId = localStorage.getItem("userId");
 
-  // Load cart items when user logs in
   useEffect(() => {
     if (userId) {
       axios.get(`http://localhost:5000/api/cart/${userId}`)

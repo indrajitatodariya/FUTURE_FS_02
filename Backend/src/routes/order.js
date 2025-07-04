@@ -3,7 +3,7 @@ import Order from "../models/Order.js";
 
 const router = express.Router();
 
-// ✅ Create order route already exists
+
 router.post("/create", async (req, res) => {
   try {
     const order = new Order(req.body);
@@ -15,7 +15,7 @@ router.post("/create", async (req, res) => {
   }
 });
 
-// ✅ Add this new route for fetching user orders
+
 router.get("/user/:userId", async (req, res) => {
   try {
     const orders = await Order.find({ userId: req.params.userId }).sort({ createdAt: -1 });

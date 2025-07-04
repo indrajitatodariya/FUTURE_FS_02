@@ -4,12 +4,11 @@ import Cart from '../models/Cart.js';
 
 const router = express.Router();
 
-// 🟢 Save a new purchase
 router.post('/save', async (req, res) => {
   const { userId, items, shippingDetails } = req.body;
 
   try {
-    // Save purchase to purchase history
+    
     const newPurchase = new Purchase({
       userId,
       items,
@@ -19,7 +18,6 @@ router.post('/save', async (req, res) => {
 
     await newPurchase.save();
 
-    // Clear the user's cart after purchase
     await Cart.findOneAndUpdate(
       { userId },
       { $set: { items: [] } }
@@ -32,7 +30,6 @@ router.post('/save', async (req, res) => {
   }
 });
 
-// 🟢 Get user's purchase history
 router.get('/:userId', async (req, res) => {
   try {
     const purchases = await Purchase.find({ userId: req.params.userId }).sort({ purchasedAt: -1 });

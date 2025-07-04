@@ -1,19 +1,20 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import products from "../data/products"; // make sure you have this exported correctly
+import products from "../data/products"; 
+
 
 function Contentr1({ searchTerm = "" }) {
   const [sortOrder, setSortOrder] = useState("");
 
-  // Copy searchTerm to lowercase safely
   const term = searchTerm.toLowerCase();
 
-  // Filter products
-  let filteredProducts = products.filter(product =>
-    product.title.toLowerCase().includes(term)
+  let filteredProducts = products.filter(
+    (product) =>
+      product.id >= 1 &&
+      product.id <= 7 &&
+      product.title.toLowerCase().includes(term)
   );
 
-  // Sort products
   if (sortOrder === "lowToHigh") {
     filteredProducts = [...filteredProducts].sort((a, b) => a.price - b.price);
   } else if (sortOrder === "highToLow") {
@@ -21,6 +22,7 @@ function Contentr1({ searchTerm = "" }) {
   }
 
   return (
+    <>
     <div className="flex flex-col mt-5">
       <div className="ml-5 mb-3">
         <h1 className="text-xl font-bold">Electronics Items</h1>
@@ -62,6 +64,8 @@ function Contentr1({ searchTerm = "" }) {
         </div>
       )}
     </div>
+    
+    </>
   );
 }
 

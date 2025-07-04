@@ -20,7 +20,7 @@ function CartPage() {
       alert("Please login before placing an order.");
       return;
     }
-    // Navigate to checkout with single item
+    
     navigate("/checkout", { state: { singleItem: item } });
   };
 
@@ -66,7 +66,7 @@ function CartPage() {
                     Remove
                   </button>
 
-                  {/* ✅ Individual Buy Button */}
+                  
                   <button
                     className="btn btn-success btn-sm mt-2"
                     onClick={() => handleSingleBuy(item)}

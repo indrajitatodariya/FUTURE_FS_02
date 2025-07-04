@@ -7,7 +7,7 @@ export function AuthProvider({ children }) {
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
-    // Check local storage on mount
+    
     const token = localStorage.getItem("token");
     const storedUserId = localStorage.getItem("userId");
 

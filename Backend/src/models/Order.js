@@ -19,7 +19,7 @@ const orderSchema = new mongoose.Schema(
     address: String,
   },
   {
-    timestamps: true, // ✅ adds createdAt & updatedAt fields
+    timestamps: true, 
   }
 );
 

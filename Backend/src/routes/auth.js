@@ -10,7 +10,7 @@ import nodemailer from 'nodemailer';
 
 const router = express.Router();
 
-// 📧 Nodemailer setup
+
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
@@ -21,7 +21,7 @@ const transporter = nodemailer.createTransport({
 console.log("✅ EMAIL_USER in auth.js:", process.env.EMAIL_USER);
 console.log("✅ EMAIL_PASS in auth.js:", process.env.EMAIL_PASS);
 
-// 📌 Register route
+
 router.post('/register', async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -57,7 +57,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// 📌 Verify email route
+
 router.get('/verify/:token', async (req, res) => {
   try {
     const user = await User.findOne({ verificationToken: req.params.token });
@@ -74,7 +74,7 @@ router.get('/verify/:token', async (req, res) => {
   }
 });
 
-// 📌 Login route
+
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {

@@ -3,7 +3,7 @@ import Cart from "../models/Cart.js";
 
 const router = express.Router();
 
-// Save cart
+
 router.post("/save", async (req, res) => {
   const { userId, items } = req.body;
   try {
@@ -22,7 +22,7 @@ router.post("/save", async (req, res) => {
   }
 });
 
-// Get cart
+
 router.get("/:userId", async (req, res) => {
   try {
     const cart = await Cart.findOne({ userId: req.params.userId });

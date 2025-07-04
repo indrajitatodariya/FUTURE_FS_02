@@ -3,7 +3,6 @@ import { useState } from "react";
 import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./AuthContext";
 import Navbar from './components/navbar';
-import Categories from './components/categories';
 import Offers from './components/offers';
 import Contentr1 from './components/contentr1';
 import Contentr2 from './components/contentr2';
@@ -19,6 +18,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import VerifyNotice from "./components/verifyNotice";
 import Checkout from "./components/Checkout";
 import OrderHistory from "./components/OrderHistory";
+import smartphonebanner from '../src/assets/smartphonebanner.webp'
+import electronicbanner from '../src/assets/electronicsbanner.webp'
+import fashionbanner from '../src/assets/fashionbanner.webp'
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -38,10 +40,18 @@ function App() {
                 <ProtectedRoute>
                   <>
                     <Navbar onSearch={setSearchTerm} />
-                    <Categories />
                     <Offers />
+                    <img
+                      src={electronicbanner}
+                      className="w-full" />
                     <Contentr1 />
+                    <img
+                      src={smartphonebanner}
+                      className="w-full" />
                     <Contentr2 />
+                    <img
+                      src={fashionbanner}
+                      className="w-full" />
                     <Contentr3 />
                     <Footer />
                   </>

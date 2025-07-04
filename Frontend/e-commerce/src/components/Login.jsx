@@ -39,7 +39,7 @@ export default function Login() {
     <div
       className="hero min-h-screen"
       style={{
-        backgroundImage: "url(https://i.pinimg.com/736x/ef/a5/19/efa519f959ffd532ee69c9deddccd3d1.jpg)"
+        backgroundImage: "url(https://images.unsplash.com/photo-1523275335684-37898b6baf30)"
       }}
     >
       <div className="hero min-h-screen">
@@ -51,7 +51,7 @@ export default function Login() {
               Not registered yet? <Link to="/register" className="btn btn-primary mt-2">Register</Link>
             </p>
           </div>
-          <div className="card w-full max-w-sm shrink-0 shadow-2xl bg-base-100">
+          <div className="card w-full max-w-sm shrink-0 shadow-xl bg-base-0">
             <div className="card-body">
               <form onSubmit={handleLogin}>
                 <fieldset>

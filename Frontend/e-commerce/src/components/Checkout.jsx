@@ -22,11 +22,11 @@ export default function Checkout() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // 👀 Check if singleItem was passed via state
+
   const singleItem = location.state?.singleItem;
   const itemsToPurchase = singleItem ? [singleItem] : cartItems;
 
-  // Validate form fields
+
   const validate = () => {
     let newErrors = {};
 
@@ -62,14 +62,13 @@ export default function Checkout() {
     }
 
     try {
-      // Send order to backend
       await axios.post("http://localhost:5000/api/order/create", {
         userId: userId,
         items: itemsToPurchase,
         address: `${formData.address}, ${formData.city}, ${formData.zip}`,
       });
 
-      // Remove purchased items from cart
+     
       if (singleItem) {
         removeFromCart(singleItem.id);
       } else {
@@ -78,7 +77,7 @@ export default function Checkout() {
 
       setSuccessMessage("✅ Order placed successfully! We will deliver soon. Thank you!");
 
-      // Reset form
+     
       setFormData({
         name: "",
         email: "",
@@ -90,7 +89,7 @@ export default function Checkout() {
       });
       setErrors({});
 
-      // Optionally redirect after delay
+      
       setTimeout(() => {
         navigate("/main");
       }, 3000);
@@ -110,7 +109,7 @@ export default function Checkout() {
       <h2 className="text-2xl font-bold mb-4">Checkout</h2>
       {successMessage && <div className="text-green-600 mb-4">{successMessage}</div>}
 
-      {/* ✅ Show items being purchased */}
+      
       <div className="mb-4">
         <h3 className="font-semibold mb-2">Order Summary:</h3>
         <ul className="list-disc list-inside">

@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 
 const router = express.Router();
 
-// ✅ Define cart schema (you can put in a new file if you want)
 const cartSchema = new mongoose.Schema({
   userId: String,
   items: [
@@ -19,13 +18,12 @@ const cartSchema = new mongoose.Schema({
 
 const Cart = mongoose.model('Cart', cartSchema);
 
-// ✅ Get user's cart
 router.get('/cart/:userId', async (req, res) => {
   const cart = await Cart.findOne({ userId: req.params.userId });
   res.json(cart ? cart.items : []);
 });
 
-// ✅ Add/update cart
+
 router.post('/cart/:userId', async (req, res) => {
   const { product } = req.body;
   let cart = await Cart.findOne({ userId: req.params.userId });
@@ -45,7 +43,7 @@ router.post('/cart/:userId', async (req, res) => {
   res.json(cart.items);
 });
 
-// ✅ Remove item
+
 router.delete('/cart/:userId/item/:productId', async (req, res) => {
   const cart = await Cart.findOne({ userId: req.params.userId });
   if (cart) {

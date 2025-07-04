@@ -19,7 +19,7 @@ export default function Register() {
 
       if (res.ok) {
         alert('Registered successfully! Please check your email to verify.');
-        navigate('/'); // Go back to login page
+        navigate('/');
       } else {
         alert(data.message);
       }
@@ -35,7 +35,7 @@ export default function Register() {
   className="hero min-h-screen"
   style={{
     backgroundImage:
-      "url(https://i.pinimg.com/736x/ef/a5/19/efa519f959ffd532ee69c9deddccd3d1.jpg)",
+      "url(https://images.unsplash.com/photo-1523275335684-37898b6baf30)",
   }}
 >
     <div className="hero  min-h-screen">
