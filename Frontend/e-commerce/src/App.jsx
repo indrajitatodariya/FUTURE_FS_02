@@ -15,7 +15,7 @@ import ProductDetail from "./components/productdetails";
 import CartPage from "./components/CartPage";
 import SearchResults from "./components/SearchResults";
 import ProtectedRoute from "./components/ProtectedRoute";
-import VerifyNotice from "./components/verifyNotice";
+import VerifyNotice from "./components/VerifyNotice";
 import Checkout from "./components/Checkout";
 import OrderHistory from "./components/OrderHistory";
 import smartphonebanner from '../src/assets/smartphonebanner.webp';
