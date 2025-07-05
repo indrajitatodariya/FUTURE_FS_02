@@ -21,7 +21,7 @@ import OrderHistory from "./components/OrderHistory";
 import smartphonebanner from '../src/assets/smartphonebanner.webp';
 import electronicbanner from '../src/assets/electronicsbanner.webp';
 import fashionbanner from '../src/assets/fashionbanner.webp';
-import { Toaster } from 'react-hot-toast'; // ✅ Already imported
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -30,7 +30,7 @@ function App() {
     <AuthProvider>
       <CartProvider>
         <Router>
-          {/* ✅ Add Toaster here to make it global */}
+          
           <Toaster position="top-right" reverseOrder={false} />
           <Routes>
             <Route path="/" element={<Firstpage />} />
