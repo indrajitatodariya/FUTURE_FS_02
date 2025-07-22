@@ -1,11 +1,15 @@
 import { useState } from "react";
-import { useCart } from "../context/CartContext";
+// import { useCart } from "../CartContext";
 import { useAuth } from "../AuthContext";
 import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-export default function Checkout() {
+export default function Checkout({ singleItem }) {
+  const { userId } = useAuth();
+  const { cartItems, removeFromCart } = useCart();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,22 +21,22 @@ export default function Checkout() {
   });
 
   const [errors, setErrors] = useState({});
-  const { cartItems, removeFromCart } = useCart();
-  const { userId } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
 
-  const singleItem = location.state?.singleItem;
-  const itemsToPurchase = singleItem ? [singleItem] : cartItems;
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" });
+  };
 
   const validate = () => {
-    let newErrors = {};
-    if (!formData.name || formData.name.length < 3) newErrors.name = "Name must be at least 3 characters";
-    if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Invalid email format";
-    if (!formData.address) newErrors.address = "Address is required";
-    if (!formData.city) newErrors.city = "City is required";
-    if (!formData.zip || !/^\d{5,}$/.test(formData.zip)) newErrors.zip = "Zip code must be at least 5 digits";
-    if (!formData.phone || !/^\d{10}$/.test(formData.phone)) newErrors.phone = "Phone number must be exactly 10 digits";
+    const newErrors = {};
+    if (!formData.name.trim()) newErrors.name = "Name is required.";
+    if (!formData.email.trim()) newErrors.email = "Email is required.";
+    if (!formData.address.trim()) newErrors.address = "Address is required.";
+    if (!formData.city.trim()) newErrors.city = "City is required.";
+    if (!formData.zip.trim()) newErrors.zip = "ZIP code is required.";
+    if (!formData.phone.trim()) newErrors.phone = "Phone number is required.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -41,80 +45,94 @@ export default function Checkout() {
     e.preventDefault();
     if (!validate()) return;
 
+    const itemsToPurchase = singleItem ? [singleItem] : cartItems;
+
     try {
-      await axios.post("http://localhost:5000/api/order/create", {
+      await axios.post(`${BASE_URL}/api/order/create`, {
         userId,
         items: itemsToPurchase,
         address: `${formData.address}, ${formData.city}, ${formData.zip}`,
+        email: formData.email,
+        phone: formData.phone,
+        paymentMode: formData.paymentMode,
+        customerName: formData.name,
       });
 
-      if (singleItem) removeFromCart(singleItem.id);
-      else cartItems.forEach((item) => removeFromCart(item.id));
+      if (singleItem) {
+        removeFromCart(singleItem.id);
+      } else {
+        cartItems.forEach((item) => removeFromCart(item.id));
+      }
 
-      toast.success("✅ Order placed successfully! We will deliver soon. Thank you!");
+      toast.success("✅ Order placed successfully!");
 
-      setFormData({ name: "", email: "", address: "", city: "", zip: "", phone: "", paymentMode: "Cash on Delivery" });
+      setFormData({
+        name: "",
+        email: "",
+        address: "",
+        city: "",
+        zip: "",
+        phone: "",
+        paymentMode: "Cash on Delivery",
+      });
       setErrors({});
 
       setTimeout(() => navigate("/main"), 3000);
     } catch (err) {
-      console.error("Error placing order:", err);
-      toast.error("❌ Failed to place order. Please try again later.");
+      console.error("Error placing order:", err.response?.data || err.message);
+      toast.error(err.response?.data?.message || "❌ Failed to place order.");
     }
   };
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   return (
-    <div className="flex flex-col lg:flex-row gap-8 p-6 max-w-6xl mx-auto">
-      <form onSubmit={handleSubmit} className="flex-1 bg-white p-6 rounded shadow space-y-3">
-        <h2 className="text-2xl font-bold mb-4">Contact & Shipping Information</h2>
+    <div className="max-w-xl mx-auto bg-white p-8 shadow-md rounded">
+      <h2 className="text-2xl font-bold mb-6 text-center">Checkout</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {[
+          { label: "Name", name: "name", type: "text" },
+          { label: "Email", name: "email", type: "email" },
+          { label: "Address", name: "address", type: "text" },
+          { label: "City", name: "city", type: "text" },
+          { label: "ZIP Code", name: "zip", type: "text" },
+          { label: "Phone", name: "phone", type: "tel" },
+        ].map((field) => (
+          <div key={field.name}>
+            <label className="block font-medium">{field.label}</label>
+            <input
+              type={field.type}
+              name={field.name}
+              value={formData[field.name]}
+              onChange={handleChange}
+              className="w-full border border-gray-300 p-2 rounded mt-1"
+            />
+            {errors[field.name] && (
+              <p className="text-red-500 text-sm mt-1">{errors[field.name]}</p>
+            )}
+          </div>
+        ))}
 
-        <input type="text" name="name" placeholder="Full Name" value={formData.name} onChange={handleChange} className="input input-bordered w-full" />
-        {errors.name && <div className="text-red-500">{errors.name}</div>}
-
-        <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} className="input input-bordered w-full" />
-        {errors.email && <div className="text-red-500">{errors.email}</div>}
-
-        <input type="text" name="address" placeholder="Address" value={formData.address} onChange={handleChange} className="input input-bordered w-full" />
-        {errors.address && <div className="text-red-500">{errors.address}</div>}
-
-        <div className="flex gap-2">
-          <input type="text" name="city" placeholder="City" value={formData.city} onChange={handleChange} className="input input-bordered w-full" />
-          <input type="text" name="zip" placeholder="Zip Code" value={formData.zip} onChange={handleChange} className="input input-bordered w-full" />
+        <div>
+          <label className="block font-medium">Payment Method</label>
+          <select
+            name="paymentMode"
+            value={formData.paymentMode}
+            onChange={handleChange}
+            className="w-full border border-gray-300 p-2 rounded mt-1"
+          >
+            <option>Cash on Delivery</option>
+            <option>UPI</option>
+            <option>Credit/Debit Card</option>
+            <option>Net Banking</option>
+          </select>
         </div>
-        {errors.city && <div className="text-red-500">{errors.city}</div>}
-        {errors.zip && <div className="text-red-500">{errors.zip}</div>}
 
-        <input type="text" name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} className="input input-bordered w-full" />
-        {errors.phone && <div className="text-red-500">{errors.phone}</div>}
-
-        <input type="text" name="paymentMode" value={formData.paymentMode} disabled className="input input-bordered w-full bg-gray-100" />
-
-        <button type="submit" className="btn btn-primary w-full">Confirm Order</button>
+        <button
+          type="submit"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition duration-200"
+        >
+          Place Order
+        </button>
       </form>
-
-      <div className="w-full lg:w-1/3 bg-white p-6 rounded shadow">
-        <h3 className="text-xl font-bold mb-4">Order Summary</h3>
-        <ul className="space-y-4">
-          {itemsToPurchase.map((item) => (
-            <li key={item.id} className="flex items-center gap-3">
-              <img src={item.image} alt={item.title} className="w-16 h-16 object-cover rounded" />
-              <div>
-                <p className="font-medium">{item.title}</p>
-                <p className="text-gray-500">Rs.{item.price} × {item.quantity || 1}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-        <div className="mt-4 border-t pt-4">
-          <p className="flex justify-between"><span>Subtotal</span><span>Rs.{itemsToPurchase.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0)}</span></p>
-          <p className="flex justify-between"><span>Shipping</span><span>Rs.50</span></p>
-          <p className="flex justify-between font-bold text-lg"><span>Total</span><span>Rs.{itemsToPurchase.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0) + 50}</span></p>
-        </div>
-      </div>
     </div>
   );
 }

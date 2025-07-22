@@ -9,12 +9,14 @@ export default function Login() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -37,7 +39,6 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-white via-gray-100 to-white relative overflow-hidden">
-
 
       <div className="absolute w-[500px] h-[500px] bg-gradient-to-r from-blue-300 to-purple-300 rounded-full blur-3xl opacity-30 animate-pulse"></div>
 
