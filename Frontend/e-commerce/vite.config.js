@@ -1,14 +1,22 @@
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,jsx,ts,tsx}",
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+
+export default defineConfig({
+  plugins: [
+    react({
+      jsxRuntime: 'automatic', // ✅ Enables JSX without needing `import React`
+    }),
   ],
-  theme: {
-    extend: {},
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
   },
-  plugins: [],
-  esbuild: {
-    jsxImportSource: 'react',
+  build: {
+    outDir: 'dist',
   },
-};
+  server: {
+    port: 5173,
+  },
+});
