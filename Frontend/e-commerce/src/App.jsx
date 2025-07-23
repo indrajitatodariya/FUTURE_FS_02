@@ -22,6 +22,7 @@ import smartphonebanner from '../src/assets/smartphonebanner.webp';
 import electronicbanner from '../src/assets/electronicsbanner.webp';
 import fashionbanner from '../src/assets/fashionbanner.webp';
 import { Toaster } from 'react-hot-toast';
+import React from "react";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
