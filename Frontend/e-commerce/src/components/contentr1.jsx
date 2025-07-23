@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import products from "../data/products"; 
+import React from 'react';
+
 
 
 function Contentr1({ searchTerm = "" }) {

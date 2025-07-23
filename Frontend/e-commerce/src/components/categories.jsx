@@ -2,6 +2,8 @@ import tv from '../assets/tv.jpg'
 import fashion from '../assets/style.jpg'
 import mobile from '../assets/mobile.jpg'
 import groce from '../assets/groce.jpg'
+import React from 'react';
+
 
 
 function Categories(){

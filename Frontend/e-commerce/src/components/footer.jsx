@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/reshot-icon-cart-BAE3K9JRS7.svg";
+import React from 'react';
+
 
 function Footer() {
   return (

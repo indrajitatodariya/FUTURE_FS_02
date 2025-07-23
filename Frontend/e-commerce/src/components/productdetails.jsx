@@ -6,6 +6,8 @@ import Contentr1 from "../components/contentr1";
 import Contentr2 from "../components/contentr2";
 import Contentr3 from "../components/contentr3";
 import { toast } from "react-hot-toast";
+import React from 'react';
+
 
 function ProductDetail() {
   const { id } = useParams();

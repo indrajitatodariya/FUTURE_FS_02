@@ -1,6 +1,8 @@
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import React from 'react';
+
 
 function CartPage() {
   const { cartItems, removeFromCart, updateQuantity } = useCart();

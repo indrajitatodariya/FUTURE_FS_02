@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import ThemeToggle from "./theme";
 import { useAuth } from "../AuthContext";
 import logoSymbol from "../assets/reshot-icon-cart-BAE3K9JRS7.svg"
+import React from 'react';
 
 function Navbar({ onSearch }) {
   const [searchInput, setSearchInput] = useState("");

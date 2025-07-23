@@ -3,6 +3,7 @@ import banner11 from '../assets/banner11.jpg';
 import banner22 from '../assets/banner22.webp';
 import banner33 from '../assets/banner33.webp';
 import banner44 from '../assets/banner44.webp';
+import React from 'react';
 
 const images = [banner11, banner22, banner33, banner44];
 
