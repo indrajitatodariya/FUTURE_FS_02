@@ -5,7 +5,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-
 export default function Checkout({ singleItem }) {
   const { userId } = useAuth();
   const { cartItems, removeFromCart } = useCart();
@@ -23,7 +22,7 @@ export default function Checkout({ singleItem }) {
 
   const [errors, setErrors] = useState({});
 
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const BASE_URL = import.meta.env.VITE_API_URL;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -46,10 +45,13 @@ export default function Checkout({ singleItem }) {
     e.preventDefault();
     if (!validate()) return;
 
+    const confirmed = window.confirm("Are you sure you want to place this order?");
+    if (!confirmed) return;
+
     const itemsToPurchase = singleItem ? [singleItem] : cartItems;
 
     try {
-      await axios.post(`${BASE_URL}/api/order/create`, {
+      const response = await axios.post(`${BASE_URL}/api/order/create`, {
         userId,
         items: itemsToPurchase,
         address: `${formData.address}, ${formData.city}, ${formData.zip}`,
@@ -59,6 +61,7 @@ export default function Checkout({ singleItem }) {
         customerName: formData.name,
       });
 
+      // Remove items from cart
       if (singleItem) {
         removeFromCart(singleItem.id);
       } else {
@@ -67,6 +70,7 @@ export default function Checkout({ singleItem }) {
 
       toast.success("✅ Order placed successfully!");
 
+      // Clear the form
       setFormData({
         name: "",
         email: "",
@@ -78,7 +82,8 @@ export default function Checkout({ singleItem }) {
       });
       setErrors({});
 
-      setTimeout(() => navigate("/main"), 3000);
+      // Redirect to homepage after short delay
+      setTimeout(() => navigate("/main"), 2000);
     } catch (err) {
       console.error("Error placing order:", err.response?.data || err.message);
       toast.error(err.response?.data?.message || "❌ Failed to place order.");
